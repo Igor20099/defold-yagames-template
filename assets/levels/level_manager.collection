@@ -1,0 +1,24 @@
+name: "proxy"
+scale_along_z: 0
+embedded_instances {
+  id: "level_manager"
+  data: "components {\n"
+  "  id: \"level_manager\"\n"
+  "  component: \"/assets/scripts/components/level_manager/level_manager.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"main_level\"\n"
+  "  type: \"collectionproxy\"\n"
+  "  data: \"collection: \\\"/assets/levels/main.collection\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "ya_games_init"
+  data: "components {\n"
+  "  id: \"ya_games_init\"\n"
+  "  component: \"/assets/scripts/components/ya_games/ya_games_init.script\"\n"
+  "}\n"
+  ""
+}

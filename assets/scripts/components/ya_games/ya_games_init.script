@@ -1,0 +1,63 @@
+local yagames = require("yagames.yagames")
+
+local ya_scores = require("assets.scripts.modules.ya_games.ya_leaderboards")
+
+--Инициализация yagames
+local function init_handler(self, err)
+	if err then
+		print("Something went wrong:", err)
+	else
+		yagames.player_init(options, function(self, err)
+			print("yagames.player_init:", err or "OK!")
+
+			if not err then
+
+			end
+		end)
+		--Загрузка Game Ready API
+		yagames.features_loadingapi_ready()
+		--Показать полноэкранную рекламу
+		msg.post('#', "show_fullscreen_adv")
+		--Инициализация лидерборда
+		ya_scores.init_handler()
+
+	end
+
+
+end
+
+
+
+function init(self)
+	yagames.init(init_handler)	
+
+end
+
+
+local function adv_open(self)
+	msg.post('/music#music', 'sound_off')
+	print('init')
+end
+
+local function adv_close(self, was_shown)
+	-- You can switch sounds back!
+end
+
+local function adv_offline(self)
+	-- Internet is offline
+end
+
+local function adv_error(self, err)
+	-- Something wrong happened :(
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("show_fullscreen_adv") then
+		yagames.adv_show_fullscreen_adv({
+			open = adv_open,
+			close = adv_close,
+			offline = adv_offline,
+			error = adv_error
+		})
+	end
+end
